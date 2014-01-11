@@ -53,7 +53,7 @@ class Pull extends Command {
 		{
 			// grab or create product in local storage
 			$product = Product::find($product_raw['id']);
-			if ( ! $product->id )
+			if ( ! $product )
 			{
 				$product = new Product;
 				$product->id = $product_raw['id'];
@@ -65,12 +65,12 @@ class Pull extends Command {
 			$this->comment('Product: '.$product->name);
 
 			// retrieve products
-			$items_request = $client->get('/api/products/'.$product->id.'/items.json')->setAuth(Config::get('sprintly.email'), Config::get('sprintly.api_key'));
+			$items_request = $client->get('/api/products/'.$product_raw['id'].'/items.json')->setAuth(Config::get('sprintly.email'), Config::get('sprintly.api_key'));
 			$items_response = $items_request->send();
 
 			// initialize snapshot
 			$snapshot = new stdClass;
-			$snapshot->psoduct_id =
+			$snapshot->product_id = $product_raw['id'];
 			$snapshot->current = new stdClass;
 			$snapshot->backlog = new stdClass;
 			$snapshot->current->{'~'} = 0;
