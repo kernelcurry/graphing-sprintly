@@ -53,7 +53,7 @@ class Pull extends Command {
 		{
 			// grab or create product in local storage
 			$product = Product::find($product_raw['id']);
-			if ( ! $product)
+			if ( is_null($product) )
 			{
 				$product = new Product;
 				$product->id = $product_raw['id'];
@@ -100,15 +100,15 @@ class Pull extends Command {
 			$snap = new Snapshot;
 			$snap->product_id = $product->id;
 			$snap->{'current_~'} = $snapshot->current->{'~'};
-			$snap->current_s = $snapshot->current->s;
-			$snap->current_m = $snapshot->current->m;
-			$snap->current_l = $snapshot->current->l;
-			$snap->current_xl = $snapshot->current->xl;
+			$snap->current_s = $snapshot->current->S;
+			$snap->current_m = $snapshot->current->M;
+			$snap->current_l = $snapshot->current->L;
+			$snap->current_xl = $snapshot->current->XL;
 			$snap->{'backlog_~'} = $snapshot->backlog->{'~'};
-			$snap->backlog_s = $snapshot->backlog->s;
-			$snap->backlog_m = $snapshot->backlog->m;
-			$snap->backlog_l = $snapshot->backlog->l;
-			$snap->backlog_xl = $snapshot->backlog->xl;
+			$snap->backlog_s = $snapshot->backlog->S;
+			$snap->backlog_m = $snapshot->backlog->M;
+			$snap->backlog_l = $snapshot->backlog->L;
+			$snap->backlog_xl = $snapshot->backlog->XL;
 			$snap->save();
 
 		}
