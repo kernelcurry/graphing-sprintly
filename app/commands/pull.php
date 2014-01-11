@@ -70,7 +70,6 @@ class Pull extends Command {
 
 			// initialize snapshot
 			$snapshot = new stdClass;
-			$snapshot->product_id = $product_raw['id'];
 			$snapshot->current = new stdClass;
 			$snapshot->backlog = new stdClass;
 			$snapshot->current->{'~'} = 0;
@@ -103,7 +102,7 @@ class Pull extends Command {
 
 			// store snapshot
 			$snap = new Snapshot;
-			$snap->product_id = $product->id;
+			$snap->product_id = $product_raw['id'];
 			$snap->{'current_~'} = $snapshot->current->{'~'};
 			$snap->current_s = $snapshot->current->S;
 			$snap->current_m = $snapshot->current->M;
