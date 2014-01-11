@@ -33,15 +33,21 @@
 					.datum(
 						[
 							{
-								"key" : "Line 1" ,
-								"values" : [
-									{x:1025409600000 , y:23} , { x:1028088000000 , y:19 } , { x:1030766400000 , y:10}
+								key : 'Current' ,
+								color : '#2ca02c',
+								values : [
+									@foreach($product->snapshots as $snapshot)
+										{ x:{{ strtotime($snapshot->created_at) }} , y:{{ $snapshot->current_total() }} },
+									@endforeach
 								]
 							},
 							{
-								"key" : "Line 2" ,
-								"values" : [
-									{x:1025409600000 , y:20} , { x:1028088000000 , y:10 } , { x:1030766400000 , y:20}
+								key : 'Backlog' ,
+								color : '#ff7f0e',
+								values : [
+									@foreach($product->snapshots as $snapshot)
+										{ x:{{ strtotime($snapshot->created_at) }} , y:{{ $snapshot->backlog_total() }} },
+									@endforeach
 								]
 							}
 						]
