@@ -3,7 +3,7 @@
 		<div class="col-sm-12 text-center">
 			<div class="btn-group-vertical">
 				@foreach($products as $product)
-					<a class="btn btn-default" href="{{ route('default.graph', $product->id) }}">{{ $product->name }}</a>
+					<a class="btn btn-default" href="{{ route('default.product', $product->id) }}">{{ $product->name }}</a>
 				@endforeach
 			</div>
 		</div>
