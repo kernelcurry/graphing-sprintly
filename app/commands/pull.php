@@ -46,17 +46,17 @@ class Pull extends Command {
 
 		// retrieve products
 		$products_request = $client->get('/api/products.json')->setAuth(Config::get('sprintly.email'), Config::get('sprintly.api_key'));
-		$products_response = $request->send();
+		$products_response = $products_request->send();
 
 		// generate snapshots for all products
-		foreach (json_decode($products_response->json()) as $product_raw)
+		foreach ($products_response->json() as $product_raw)
 		{
 			// grab or create product in local storage
-			$product = Product::find($product_raw->id);
+			$product = Product::find($product_raw['id']);
 			if ( ! $product)
 			{
 				$product = new Product;
-				$product->name = $product_raw->name;
+				$product->name = $product_raw['name'];
 			}
 
 			// product output
@@ -64,7 +64,7 @@ class Pull extends Command {
 
 			// retrieve products
 			$items_request = $client->get('/products/'.$product->id.'/items.json')->setAuth(Config::get('sprintly.email'), Config::get('sprintly.api_key'));
-			$items_response = $request->send();
+			$items_response = $items_request->send();
 
 			// initialize snapshot
 			$snapshot = new stdClass;
@@ -81,20 +81,20 @@ class Pull extends Command {
 			foreach($items_response->json() as $item)
 			{
 				// increment sizes
-				$snapshot->{$item->score}++;
+				$snapshot->{$item['score']}++;
 
 				// set type
-				if ($item->status == 'in-progress')
+				if ($item['status'] == 'in-progress')
 				{
-					$snapshot->current->{$item->score}++;
+					$snapshot->current->{$item['score']}++;
 				}
-				elseif ($item->status == 'backlog')
+				elseif ($item['status'] == 'backlog')
 				{
-					$snapshot->backlog->{$item->score}++;
+					$snapshot->backlog->{$item['score']}++;
 				}
 			}
 
-			$this->comment(json_encode($snapshot));
+			var_dump($snapshot);
 
 		}
 
