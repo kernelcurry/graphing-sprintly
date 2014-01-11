@@ -53,7 +53,7 @@ class Pull extends Command {
 		{
 			// grab or create product in local storage
 			$product = Product::find($product_raw['id']);
-			if ( is_null($product) )
+			if ( ! $product->id )
 			{
 				$product = new Product;
 				$product->id = $product_raw['id'];
@@ -78,6 +78,11 @@ class Pull extends Command {
 			$snapshot->current->M = 0;
 			$snapshot->current->L = 0;
 			$snapshot->current->XL = 0;
+			$snapshot->backlog->{'~'} = 0;
+			$snapshot->backlog->S = 0;
+			$snapshot->backlog->M = 0;
+			$snapshot->backlog->L = 0;
+			$snapshot->backlog->XL = 0;
 
 			// calculate snapshot
 			foreach($items_response->json() as $item)
