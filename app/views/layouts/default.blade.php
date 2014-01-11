@@ -13,6 +13,17 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+		<script src="{{ asset('packages/nvd3/lib/d3.v3.js') }}"></script>
+		<script src="{{ asset('packages/nvd3/nv.d3.js') }}"></script>
+		<script src="{{ asset('packages/nvd3/src/tooltip.js') }}"></script>
+		<script src="{{ asset('packages/nvd3/src/utils.js') }}"></script>
+		<script src="{{ asset('packages/nvd3/src/models/legend.js') }}"></script>
+		<script src="{{ asset('packages/nvd3/src/models/axis.js') }}"></script>
+		<script src="{{ asset('packages/nvd3/src/models/scatter.js') }}"></script>
+		<script src="{{ asset('packages/nvd3/src/models/line.js') }}"></script>
+		<script src="{{ asset('packages/nvd3/src/models/lineWithFocusChart.js') }}"></script>
+		<script src="{{ asset('packages/nvd3/stream_layers.js') }}"></script>
 	</head>
 	<body>
 		<div class="container">
