@@ -11,5 +11,5 @@
 |
 */
 
-Route::get('/', ['as' => 'default.index', 'uses' => 'DefaultController@index']);
-Route::get('products/{product}', ['as' => 'default.product', 'uses' => 'DefaultController@product']);
+Route::get('/', array('as' => 'default.index', 'uses' => 'DefaultController@index'));
+Route::get('products/{product}', array('as' => 'default.product', 'uses' => 'DefaultController@product'));
