@@ -19,6 +19,9 @@
 		nv.addGraph(function() {
 			var chart = nv.models.lineWithFocusChart();
 
+			chart.lines.forceY([ 0 ]);  // main chart
+			chart.lines2.forceY([ 0 ]); // view finder chart
+
 			chart.xAxis
 				.tickFormat(function(d) { return d3.time.format('%x')(new Date(d),0) });
 			chart.x2Axis
@@ -29,30 +32,33 @@
 			chart.y2Axis
 				.tickFormat(d3.format(',f'));
 
+				chart.lines.forceY([ 0 ]);  // main chart
+				chart.lines2.forceY([ 0 ]); // view finder chart
+
 			d3.select('#chart svg')
-					.datum(
-						[
-							{
-								key : 'Current' ,
-								color : '#2ca02c',
-								values : [
-									@foreach($product->snapshots as $snapshot)
-										{ x:{{ strtotime($snapshot->created_at) }} , y:{{ $snapshot->current_total() }} },
-									@endforeach
-								]
-							},
-							{
-								key : 'Backlog' ,
-								color : '#ff7f0e',
-								values : [
-									@foreach($product->snapshots as $snapshot)
-										{ x:{{ strtotime($snapshot->created_at) }} , y:{{ $snapshot->backlog_total() }} },
-									@endforeach
-								]
-							}
-						]
-					)
-					.call(chart);
+				.datum(
+					[
+						{
+							key : 'Current' ,
+							color : '#2ca02c',
+							values : [
+								@foreach($product->snapshots as $snapshot)
+									{ x:{{ strtotime($snapshot->created_at) }} , y:{{ $snapshot->current_total() }} },
+								@endforeach
+							]
+						},
+						{
+							key : 'Backlog' ,
+							color : '#ff7f0e',
+							values : [
+								@foreach($product->snapshots as $snapshot)
+									{ x:{{ strtotime($snapshot->created_at) }} , y:{{ $snapshot->backlog_total() }} },
+								@endforeach
+							]
+						}
+					]
+				)
+				.call(chart);
 
 			nv.utils.windowResize(chart.update);
 
