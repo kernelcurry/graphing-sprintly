@@ -37,7 +37,7 @@
 								color : '#2ca02c',
 								values : [
 									@foreach($product->snapshots as $snapshot)
-										{ x:{{ date('mdY', strtotime($snapshot->created_at)) }} , y:{{ $snapshot->current_total() }} },
+										{ x:{{ strtotime($snapshot->created_at) }} , y:{{ $snapshot->current_total() }} },
 									@endforeach
 								]
 							},
@@ -46,7 +46,7 @@
 								color : '#ff7f0e',
 								values : [
 									@foreach($product->snapshots as $snapshot)
-										{ x:{{ date('mdY', strtotime($snapshot->created_at)) }} , y:{{ $snapshot->backlog_total() }} },
+										{ x:{{ strtotime($snapshot->created_at) }} , y:{{ $snapshot->backlog_total() }} },
 									@endforeach
 								]
 							}
