@@ -56,14 +56,16 @@ class Pull extends Command {
 			if ( ! $product)
 			{
 				$product = new Product;
+				$product->id = $product_raw['id'];
 				$product->name = $product_raw['name'];
+				$product->save();
 			}
 
 			// product output
 			$this->comment('Product: '.$product->name);
 
 			// retrieve products
-			$items_request = $client->get('/products/'.$product->id.'/items.json')->setAuth(Config::get('sprintly.email'), Config::get('sprintly.api_key'));
+			$items_request = $client->get('/api/products/'.$product->id.'/items.json')->setAuth(Config::get('sprintly.email'), Config::get('sprintly.api_key'));
 			$items_response = $items_request->send();
 
 			// initialize snapshot
@@ -71,11 +73,11 @@ class Pull extends Command {
 			$snapshot->psoduct_id =
 			$snapshot->current = new stdClass;
 			$snapshot->backlog = new stdClass;
-			$snapshot->{'~'} = 0;
-			$snapshot->S = 0;
-			$snapshot->M = 0;
-			$snapshot->L = 0;
-			$snapshot->XL = 0;
+			$snapshot->current->{'~'} = 0;
+			$snapshot->current->S = 0;
+			$snapshot->current->M = 0;
+			$snapshot->current->L = 0;
+			$snapshot->current->XL = 0;
 
 			// calculate snapshot
 			foreach($items_response->json() as $item)
@@ -94,7 +96,20 @@ class Pull extends Command {
 				}
 			}
 
-			var_dump($snapshot);
+			// store snapshot
+			$snap = new Snapshot;
+			$snap->product_id = $product->id;
+			$snap->{'current_~'} = $snapshot->current->{'~'};
+			$snap->current_s = $snapshot->current->s;
+			$snap->current_m = $snapshot->current->m;
+			$snap->current_l = $snapshot->current->l;
+			$snap->current_xl = $snapshot->current->xl;
+			$snap->{'backlog_~'} = $snapshot->backlog->{'~'};
+			$snap->backlog_s = $snapshot->backlog->s;
+			$snap->backlog_m = $snapshot->backlog->m;
+			$snap->backlog_l = $snapshot->backlog->l;
+			$snap->backlog_xl = $snapshot->backlog->xl;
+			$snap->save();
 
 		}
 
