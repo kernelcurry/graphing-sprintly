@@ -20,14 +20,14 @@
 			var chart = nv.models.lineWithFocusChart();
 
 			chart.xAxis
-					.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
+				.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
 			chart.x2Axis
-					.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
+				.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
 
 			chart.yAxis
-					.tickFormat(d3.format(',f'));
+				.tickFormat(d3.format(',f'));
 			chart.y2Axis
-					.tickFormat(d3.format(',f'));
+				.tickFormat(d3.format(',f'));
 
 			d3.select('#chart svg')
 					.datum(
@@ -35,13 +35,13 @@
 							{
 								"key" : "Line 1" ,
 								"values" : [
-									[ 1025409600000 , 23] , [ 1028088000000 , 19] , [1030766400000 , 10]
+									{x:1025409600000 , y:23} , [ x:1028088000000 , y:19 } , { x:1030766400000 , y:10}
 								]
 							},
 							{
 								"key" : "Line 2" ,
 								"values" : [
-									[ 1025409600000 , 10] , [ 1028088000000 , 22] , [1030766400000 , 15]
+									{x:1025409600000 , y:20} , [ x:1028088000000 , y:10 } , { x:1030766400000 , y:20}
 								]
 							}
 						]
