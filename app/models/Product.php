@@ -6,7 +6,7 @@ class Product extends Eloquent {
 
 	public function snapshots()
 	{
-		return $this->hayMany('Snapshot');
+		return $this->hasMany('Snapshot');
 	}
 
 }
