@@ -11,7 +11,5 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', ['as' => 'default.index', 'uses' => 'DefaultController@index']);
+Route::get('products/{product}', ['as' => 'default.product', 'uses' => 'DefaultController@product']);
