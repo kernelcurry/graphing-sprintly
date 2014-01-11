@@ -23,9 +23,9 @@
 			chart.lines2.forceY([ 0 ]); // view finder chart
 
 			chart.xAxis
-				.tickFormat(function(d) { return d3.time.format('%x')(new Date(d),0) });
+				.tickFormat(function(d) { return d3.time.format('%d-%b')(new Date(d),0) });
 			chart.x2Axis
-				.tickFormat(function(d) { return d3.time.format('%x')(new Date(d),0) });
+				.tickFormat(function(d) { return d3.time.format('%d-%b')(new Date(d),0) });
 
 			chart.yAxis
 				.tickFormat(d3.format(',f'));
