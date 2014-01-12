@@ -25,9 +25,9 @@
 				.forceY([ 0 ]);
 
 			chart.xAxis
-				.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
+				.tickFormat(function(d) { return d3.time.format('%x\n%H:%M')(new Date(d)) });
 			chart.x2Axis
-				.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
+				.tickFormat(function(d) { return d3.time.format('%x\n%H:%M')(new Date(d)) });
 
 			chart.yAxis
 				.tickFormat(d3.format(',f'));
